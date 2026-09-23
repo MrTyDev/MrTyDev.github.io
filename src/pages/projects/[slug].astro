@@ -1,0 +1,78 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Cover from '../../components/Cover.astro';
+import { Image } from 'astro:assets';
+import { TAGS } from '../../content.config';
+import { url } from '../../lib/url';
+
+export async function getStaticPaths() {
+  const all = (await getCollection('projects')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  return all.map((project, i) => ({
+    params: { slug: project.id },
+    props: { project, prev: all[i - 1], next: all[i + 1] },
+  }));
+}
+const { project, prev, next } = Astro.props;
+const { Content } = await render(project);
+const d = project.data;
+---
+<Base title={d.title} description={d.summary}>
+  <article class="wrap">
+    <header class="page-head">
+      <a href={url('/#projects')}>All projects</a>
+      <h1 style="margin-top:1rem">{d.title}</h1>
+      <p class="lede">{d.summary}</p>
+      <p class="meta">
+        {d.role && <span>{d.role}</span>}
+        {d.when && <span>{d.when}</span>}
+        <span class="tags" style="margin:0">{d.tags.map((t) => <span style={`--tag: var(--c-${t}); display:inline-flex; gap:.35rem; align-items:center`}><i style="width:.55rem;height:.55rem;border-radius:2px;background:var(--tag);display:inline-block"></i>{TAGS[t]}</span>)}</span>
+      </p>
+    </header>
+    <figure class="hero-cover">
+      <Cover project={project} eager />
+      {d.coverCaption && <figcaption>{d.coverCaption}</figcaption>}
+    </figure>
+
+    <div class="article">
+      <div>
+        <div class="prose"><Content /></div>
+        {d.gallery.length > 0 && (
+          <div class="gallery">
+            {d.gallery.map((g) => (
+              <figure class={g.phone ? 'is-phone' : ''}>
+                <Image src={g.src} alt={g.alt} widths={[480, 900, 1400]} sizes="(max-width: 860px) 100vw, 60vw" />
+                {g.caption && <figcaption>{g.caption}</figcaption>}
+              </figure>
+            ))}
+          </div>
+        )}
+      </div>
+      <aside class="side">
+        {d.evidence.length > 0 && (
+          <section class="evidence">
+            <h2>{d.evidenceTitle}</h2>
+            <dl>{d.evidence.map((e) => <div><dt>{e.label}</dt><dd>{e.value}</dd></div>)}</dl>
+          </section>
+        )}
+        {d.links.length > 0 && (
+          <section>
+            <h2>Read more</h2>
+            <ul>{d.links.map((l) => <li><a href={l.url}>{l.label}</a></li>)}</ul>
+          </section>
+        )}
+        {d.stack.length > 0 && (
+          <section>
+            <h2>Built with</h2>
+            <ul class="stack">{d.stack.map((s) => <li>{s}</li>)}</ul>
+          </section>
+        )}
+      </aside>
+    </div>
+
+    <nav class="pager" aria-label="More projects">
+      {prev ? <a href={url(`/projects/${prev.id}/`)}>Newer: {prev.data.title}</a> : <span />}
+      {next ? <a href={url(`/projects/${next.id}/`)}>Older: {next.data.title}</a> : <span />}
+    </nav>
+  </article>
+</Base>

@@ -1,0 +1,46 @@
+---
+// Shows the project's cover image, or draws a "detection" cover from its id
+// so every project looks finished before it has a real picture.
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props { project: CollectionEntry<'projects'>; eager?: boolean }
+const { project, eager = false } = Astro.props;
+const { cover, coverAlt, coverPosition, tags, title } = project.data;
+
+let h = 0;
+for (const ch of project.id) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
+const rand = (n: number) => { h = (h * 1103515245 + 12345) >>> 0; return (h % 1000) / 1000 * n; };
+const W = 800, H = 450;
+const bw = 150 + rand(130), bh = 110 + rand(110);
+const bx = 90 + rand(W - bw - 180), by = 70 + rand(H - bh - 140);
+const conf = (0.9 + rand(0.09)).toFixed(2);
+const label = `${project.id.replace(/-/g, '_')} ${conf}`;
+const cx = bx + bw / 2, cy = by + bh / 2;
+const gid = `g-${project.id}`;
+---
+<div class="cover" style={`--tag: var(--c-${tags[0]}); --cover-pos: ${coverPosition === "top" ? "top center" : "center"}`}>
+  {cover ? (
+    <Image src={cover} alt={coverAlt ?? title} widths={[480, 800, 1200]} sizes="(max-width: 720px) 100vw, 50vw" loading={eager ? 'eager' : 'lazy'} />
+  ) : (
+    <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs>
+        <radialGradient id={gid} cx={cx / W} cy={cy / H} r="0.42">
+          <stop offset="0" stop-color="#ffe29a" stop-opacity="0.95" />
+          <stop offset="0.35" stop-color="#ff9f1c" stop-opacity="0.55" />
+          <stop offset="1" stop-color="#ff9f1c" stop-opacity="0" />
+        </radialGradient>
+        <pattern id={`${gid}-p`} width="25" height="25" patternUnits="userSpaceOnUse">
+          <path d="M25 0H0V25" fill="none" stroke="#fff" stroke-opacity="0.09" />
+        </pattern>
+      </defs>
+      <rect width={W} height={H} fill="#0f1d2e" />
+      <rect width={W} height={H} style="fill: var(--tag)" opacity="0.62" />
+      <rect width={W} height={H} fill={`url(#${gid}-p)`} />
+      <rect width={W} height={H} fill={`url(#${gid})`} />
+      <rect class="cover-box" x={bx} y={by} width={bw} height={bh} rx="4" fill="none" stroke="#ff9f1c" stroke-width="2.5" />
+      <rect x={bx - 1.25} y={by - 32} width={label.length * 12 + 16} height="32" rx="3" fill="#ff9f1c" />
+      <text x={bx + 7} y={by - 9} font-family="IBM Plex Mono, monospace" font-size="20" fill="#1b1300">{label}</text>
+    </svg>
+  )}
+</div>

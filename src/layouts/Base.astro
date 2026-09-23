@@ -1,0 +1,51 @@
+---
+import '../styles/global.css';
+import { site } from '../data/site';
+import { url } from '../lib/url';
+
+interface Props { title?: string; description?: string }
+const { title, description = site.description } = Astro.props;
+const pageTitle = title ? `${title} | ${site.name}` : `${site.name}, AI & machine learning`;
+const path = Astro.url.pathname;
+const nav = [
+  { label: 'Projects', href: '/#projects' },
+  { label: 'Homelab', href: '/#homelab' },
+  { label: 'Notes', href: '/notes/' },
+  { label: 'About', href: '/about/' },
+];
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{pageTitle}</title>
+  <meta name="description" content={description} />
+  <meta property="og:title" content={pageTitle} />
+  <meta property="og:description" content={description} />
+  <link rel="icon" href={url('/favicon.svg')} type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:ital,wght@0,400;0,500;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="wrap nav">
+    <a class="brand" href={url('/')}><span class="brand-mark" aria-hidden="true">{site.short}</span>{site.name}</a>
+    <nav class="nav-links" aria-label="Main">
+      {nav.map((n) => <a href={url(n.href)} aria-current={path.startsWith(url(n.href)) && !n.href.includes('#') ? 'page' : undefined}>{n.label}</a>)}
+    </nav>
+  </header>
+  <main id="main"><slot /></main>
+  <footer class="footer">
+    <div class="wrap">
+      <p class="footer-big">Say hej.</p>
+      <a class="footer-mail" href={`mailto:${site.email}`}>{site.email}</a>
+      <div class="footer-row">
+        <span>Built with Astro and Claude Code, for a generative AI course.</span>
+        <nav aria-label="Elsewhere">{site.links.map((l) => <a href={l.url}>{l.label}</a>)}</nav>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

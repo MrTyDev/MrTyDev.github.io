@@ -1,0 +1,112 @@
+---
+import { url } from '../lib/url';
+import { site } from '../data/site';
+---
+<section class="hero wrap" aria-labelledby="hero-title">
+  <div class="viewfinder" id="viewfinder">
+    <span class="corner tl" aria-hidden="true"></span><span class="corner tr" aria-hidden="true"></span>
+    <span class="corner bl" aria-hidden="true"></span><span class="corner br" aria-hidden="true"></span>
+    <p class="hud mono" aria-hidden="true"><span class="rec"></span>live, 60 fps</p>
+
+    <h1 id="hero-title">
+      Hi, I’m <span class="det" data-label="person 0.99">Alexander</span>.
+      I teach computers to <span class="det" data-label="computer_vision 0.97">see</span>,
+      then <span class="det" data-label="explainable_ai 0.96">check</span> what they were looking at.
+    </h1>
+
+    <p class="intro">
+      MSc student in AI and machine learning at BTH in Karlskrona. I build vision systems
+      for cheap hardware, like a drone interceptor that runs at 60 FPS on a Raspberry Pi,
+      and I tinker with edge AI on a server in my apartment.
+    </p>
+    <p class="actions">
+      <a class="btn primary" href={url('/#projects')}>See what I’ve built</a>
+      <a class="btn" href={`mailto:${site.email}`}>Email me</a>
+    </p>
+
+    <div class="tracker" id="tracker" aria-hidden="true"><span class="mono">tracking</span></div>
+  </div>
+</section>
+
+<style>
+  .hero { padding-block: clamp(1rem, 3vw, 2rem) 0; }
+  .viewfinder {
+    position: relative;
+    padding: clamp(3rem, 8vw, 6.5rem) clamp(1.25rem, 6vw, 5rem) clamp(2.5rem, 6vw, 5rem);
+    overflow: hidden;
+  }
+  .corner { position: absolute; width: 2.2rem; height: 2.2rem; border: 3px solid var(--ink); }
+  .tl { top: 0; left: 0; border-right: 0; border-bottom: 0; }
+  .tr { top: 0; right: 0; border-left: 0; border-bottom: 0; }
+  .bl { bottom: 0; left: 0; border-right: 0; border-top: 0; }
+  .br { bottom: 0; right: 0; border-left: 0; border-top: 0; }
+  .hud { position: absolute; top: 1.1rem; right: 3.2rem; margin: 0; font-size: 0.8rem; color: var(--mist); display: flex; align-items: center; gap: 0.45rem; }
+  .rec { width: 0.55rem; height: 0.55rem; border-radius: 50%; background: #e5484d; }
+
+  h1 {
+    font-size: clamp(2.2rem, 5.6vw, 5rem);
+    font-weight: 700;
+    line-height: 1.32;
+    letter-spacing: -0.04em;
+    max-width: 19ch;
+  }
+  @media (max-width: 640px) { h1 { line-height: 1.68; } }
+  h1 :global(.det)::after { font-size: clamp(0.62rem, 1.1vw, 0.85rem); }
+
+  .intro { font-size: clamp(1.1rem, 1.6vw, 1.3rem); max-width: 38rem; margin: 2rem 0 0; color: var(--mist); }
+  .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 2rem 0 0; }
+  .btn {
+    display: inline-block; padding: 0.85rem 1.3rem; border-radius: 999px; font-weight: 700;
+    text-decoration: none; color: var(--ink); border: 2px solid var(--ink);
+  }
+  .btn.primary { background: var(--ink); color: var(--sky); }
+  .btn:hover { transform: translateY(-1px); }
+
+  .tracker {
+    position: absolute; left: 0; top: 0; width: 5.5rem; height: 5.5rem;
+    border: 2px dashed var(--lock); border-radius: 4px; pointer-events: none;
+    opacity: 0; transition: opacity 0.2s;
+  }
+  .tracker span { position: absolute; top: 100%; left: -2px; margin-top: 3px; font-size: 0.7rem; color: var(--lock); }
+  .viewfinder.is-tracking .tracker { opacity: 1; }
+
+  /* One orchestrated moment: the boxes lock on, one after another. */
+  @media (prefers-reduced-motion: no-preference) {
+    h1 :global(.det)::before, h1 :global(.det)::after { animation: lock 0.55s cubic-bezier(.2,.8,.2,1) both; }
+    h1 :global(.det:nth-of-type(1))::before, h1 :global(.det:nth-of-type(1))::after { animation-delay: 0.35s; }
+    h1 :global(.det:nth-of-type(2))::before, h1 :global(.det:nth-of-type(2))::after { animation-delay: 0.75s; }
+    h1 :global(.det:nth-of-type(3))::before, h1 :global(.det:nth-of-type(3))::after { animation-delay: 1.15s; }
+    @keyframes lock {
+      0% { opacity: 0; transform: scale(1.6); }
+      60% { opacity: 1; }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    .rec { animation: rec 1.6s steps(2) infinite; }
+    @keyframes rec { 50% { opacity: 0.2; } }
+  }
+</style>
+
+<script>
+  // A dashed box that chases the pointer, like the tracker on Skarven.
+  const vf = document.getElementById('viewfinder');
+  const box = document.getElementById('tracker');
+  const fine = window.matchMedia('(pointer: fine)').matches;
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (vf && box && fine && !reduced) {
+    let tx = 0, ty = 0, x = 0, y = 0, raf = 0;
+    const step = () => {
+      x += (tx - x) * 0.18;
+      y += (ty - y) * 0.18;
+      box.style.transform = `translate(${x}px, ${y}px)`;
+      raf = Math.abs(tx - x) + Math.abs(ty - y) > 0.5 ? requestAnimationFrame(step) : 0;
+    };
+    vf.addEventListener('pointermove', (e) => {
+      const r = vf.getBoundingClientRect();
+      tx = e.clientX - r.left - box.offsetWidth / 2;
+      ty = e.clientY - r.top - box.offsetHeight / 2;
+      vf.classList.add('is-tracking');
+      if (!raf) raf = requestAnimationFrame(step);
+    });
+    vf.addEventListener('pointerleave', () => vf.classList.remove('is-tracking'));
+  }
+</script>

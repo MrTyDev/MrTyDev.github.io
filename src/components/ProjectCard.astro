@@ -1,0 +1,20 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { TAGS } from '../content.config';
+import Cover from './Cover.astro';
+import { url } from '../lib/url';
+
+interface Props { project: CollectionEntry<'projects'> }
+const { project } = Astro.props;
+const { title, summary, tags, featured } = project.data;
+---
+<a class:list={['card', { 'is-featured': featured }]} href={url(`/projects/${project.id}/`)} data-tags={tags.join(' ')}>
+  <Cover project={project} />
+  <div class="card-body">
+    <h3>{title}</h3>
+    <p>{summary}</p>
+    <ul class="tags">
+      {tags.map((t) => <li style={`--tag: var(--c-${t})`}>{TAGS[t]}</li>)}
+    </ul>
+  </div>
+</a>
