@@ -15,7 +15,7 @@
   --c-llm: #6b4fd8;
   --c-homelab: #d98200;
 
-  --display: "Familjen Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --display: "Familjen Grotesk", "Helvetica Neue", Arial, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
   --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
   --measure: 36rem;
   --wrap: 76rem;

@@ -28,7 +28,7 @@ const en = {
   // "Right now": edit these whenever life changes.
   now: [
     { label: 'Building', text: 'More things for my home server, like my own audiobook reader.' },
-    { label: 'Studying', text: 'Final stretch of my MSc in AI & machine learning at BTH, now on exchange in Taiwan. Graduating June 2027.' },
+    { label: 'Studying', text: 'Final stretch of my MSc in AI & machine learning at BTH, now on exchange at Chang Gung University in Taiwan. Graduating June 2027.' },
     { label: 'Learning', text: 'Mandarin with Zhuyin, on a typing trainer I wrote for myself.' },
     { label: 'Looking for', text: 'Work in AI, sensor systems or software for the defence industry.' },
   ],
@@ -60,7 +60,7 @@ const en = {
   ],
 
   // Exchange semester. Leave school empty to hide the line.
-  exchange: { school: '', place: 'Taiwan', when: 'Autumn 2026' },
+  exchange: { school: 'Chang Gung University', place: 'Taoyuan, Taiwan', when: 'Autumn 2026' },
 
   education: {
     degree: 'MSc in Engineering, AI and Machine Learning',

@@ -7,7 +7,7 @@ export const zh = {
 
   now: [
     { label: '正在做', text: '為家裡的伺服器做更多東西，例如我自己的有聲書閱讀器。' },
-    { label: '就讀', text: 'BTH 人工智慧與機器學習碩士最後階段，目前在台灣交換。預計 2027 年 6 月畢業。' },
+    { label: '就讀', text: 'BTH 人工智慧與機器學習碩士最後階段，目前在台灣長庚大學交換。預計 2027 年 6 月畢業。' },
     { label: '正在學', text: '用注音學中文，練習工具是我自己寫的打字練習器。' },
     { label: '正在找', text: 'AI、感測系統或國防產業的軟體工作。' },
   ],
@@ -38,7 +38,7 @@ export const zh = {
     },
   ],
 
-  exchange: { school: '', place: '台灣', when: '2026 年秋季' },
+  exchange: { school: '長庚大學', place: '台灣桃園', when: '2026 年秋季' },
 
   education: {
     degree: '人工智慧與機器學習工程碩士',

@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import { site, getContent } from '../data/site';
+import { site, getContent, identity } from '../data/site';
 import { url } from '../lib/url';
 import { LANGS, lurl, switchPath, t, type Lang } from '../i18n/ui';
 
@@ -32,7 +32,9 @@ const others = (Object.keys(LANGS) as Lang[]).map((l) => ({ lang: l, href: switc
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:ital,wght@0,400;0,500;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  {lang === 'zh' && <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet" />}
+  {lang === 'zh'
+    ? <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet" />
+    : <link href={`https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap&text=${encodeURIComponent(identity.nameZh + LANGS.zh.short + LANGS.zh.label)}`} rel="stylesheet" />}
 </head>
 <body>
   <a class="skip" href="#main">{tr.skip}</a>
