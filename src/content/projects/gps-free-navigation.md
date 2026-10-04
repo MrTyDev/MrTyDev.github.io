@@ -5,7 +5,7 @@ role: Individual project, Advanced Machine Learning (grade A)
 when: April 2026
 order: 3
 date: 2026-04-24
-tags: [defence, xai]
+tags: [defence, research, xai]
 featured: true
 cover: ./images/gps-drift.jpg
 coverAlt: A chart of horizontal position drift against GPS-denied duration, comparing raw IMU dead reckoning with the corrected model

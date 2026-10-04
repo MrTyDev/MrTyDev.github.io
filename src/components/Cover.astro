@@ -2,9 +2,9 @@
 // Shows the project's cover image, or draws a "detection" cover from its id
 // so every project looks finished before it has a real picture.
 import { Image } from 'astro:assets';
-import type { CollectionEntry } from 'astro:content';
+import type { Project } from '../lib/projects';
 
-interface Props { project: CollectionEntry<'projects'>; eager?: boolean }
+interface Props { project: Pick<Project, 'id' | 'data'>; eager?: boolean }
 const { project, eager = false } = Astro.props;
 const { cover, coverAlt, coverPosition, tags, title } = project.data;
 

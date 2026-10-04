@@ -1,21 +1,25 @@
 ---
 import '../styles/global.css';
-import { site } from '../data/site';
+import { site, getContent } from '../data/site';
 import { url } from '../lib/url';
+import { LANGS, lurl, switchPath, t, type Lang } from '../i18n/ui';
 
-interface Props { title?: string; description?: string }
-const { title, description = site.description } = Astro.props;
-const pageTitle = title ? `${title} | ${site.name}` : `${site.name}, AI & machine learning`;
+interface Props { lang: Lang; title?: string; description?: string }
+const { lang, title } = Astro.props;
+const tr = t(lang);
+const description = Astro.props.description ?? getContent(lang).description;
+const pageTitle = title ? `${title} | ${site.name}` : `${site.name}, ${tr.siteTitle}`;
 const path = Astro.url.pathname;
 const nav = [
-  { label: 'Projects', href: '/#projects' },
-  { label: 'Homelab', href: '/#homelab' },
-  { label: 'Notes', href: '/notes/' },
-  { label: 'About', href: '/about/' },
+  { label: tr.nav.projects, href: '/#projects' },
+  { label: tr.nav.homelab, href: '/#homelab' },
+  { label: tr.nav.notes, href: '/notes/' },
+  { label: tr.nav.about, href: '/about/' },
 ];
+const others = (Object.keys(LANGS) as Lang[]).map((l) => ({ lang: l, href: switchPath(path, l), ...LANGS[l] }));
 ---
 <!doctype html>
-<html lang="en">
+<html lang={LANGS[lang].html}>
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -23,27 +27,39 @@ const nav = [
   <meta name="description" content={description} />
   <meta property="og:title" content={pageTitle} />
   <meta property="og:description" content={description} />
+  {others.map((o) => <link rel="alternate" hreflang={o.html} href={new URL(o.href, Astro.site)} />)}
   <link rel="icon" href={url('/favicon.svg')} type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:ital,wght@0,400;0,500;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  {lang === 'zh' && <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet" />}
 </head>
 <body>
-  <a class="skip" href="#main">Skip to content</a>
+  <a class="skip" href="#main">{tr.skip}</a>
   <header class="wrap nav">
-    <a class="brand" href={url('/')}><span class="brand-mark" aria-hidden="true">{site.short}</span>{site.name}</a>
-    <nav class="nav-links" aria-label="Main">
-      {nav.map((n) => <a href={url(n.href)} aria-current={path.startsWith(url(n.href)) && !n.href.includes('#') ? 'page' : undefined}>{n.label}</a>)}
-    </nav>
+    <a class="brand" href={lurl(lang, '/')}><span class="brand-mark" aria-hidden="true">{site.short}</span>{site.name}</a>
+    <div class="nav-right">
+      <nav class="nav-links" aria-label={tr.navLabel}>
+        {nav.map((n) => {
+          const href = lurl(lang, n.href);
+          return <a href={href} aria-current={!n.href.includes('#') && path.startsWith(href) ? 'page' : undefined}>{n.label}</a>;
+        })}
+      </nav>
+      <nav class="lang-switch" aria-label={tr.langLabel}>
+        {others.map((o) => (
+          <a href={o.href} hreflang={o.html} lang={o.html} aria-current={o.lang === lang ? 'true' : undefined} title={o.label}>{o.short}</a>
+        ))}
+      </nav>
+    </div>
   </header>
   <main id="main"><slot /></main>
   <footer class="footer">
     <div class="wrap">
-      <p class="footer-big">Say hej.</p>
+      <p class="footer-big">{tr.footerBig}</p>
       <a class="footer-mail" href={`mailto:${site.email}`}>{site.email}</a>
       <div class="footer-row">
-        <span>Built with Astro and Claude Code, for a generative AI course.</span>
-        <nav aria-label="Elsewhere">{site.links.map((l) => <a href={l.url}>{l.label}</a>)}</nav>
+        <span>{tr.footerBuilt}</span>
+        <nav aria-label={tr.elsewhere}>{site.links.map((l) => <a href={l.url}>{l.label}</a>)}</nav>
       </div>
     </div>
   </footer>

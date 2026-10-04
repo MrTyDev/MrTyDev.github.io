@@ -8,6 +8,7 @@
   --detect: #ff9f1c;   /* detection boxes */
   --lock: #0e8f86;     /* locked-on state, links */
 
+  --c-research: #2a7f62;
   --c-defence: #1f5aa6;
   --c-xai: #c2366b;
   --c-edge: #0e9e8e;
@@ -205,3 +206,27 @@ a.unit:hover { background: #2d4058; }
 .gallery img, .shot img { border-radius: var(--r); box-shadow: 0 1px 0 var(--line), 0 12px 32px -18px rgba(16, 35, 58, 0.45); }
 .gallery figcaption, .shot figcaption { color: var(--mist); font-size: 0.9rem; margin-top: 0.6rem; }
 .shot { margin-top: 2rem; max-width: 30rem; }
+
+/* About: identity line and experience timeline ------------------------- */
+.identity { display: flex; flex-wrap: wrap; gap: 0.35rem 1.25rem; margin: 1rem 0 0; font-size: 1.15rem; font-weight: 500; }
+.identity span + span { color: var(--mist); }
+.timeline { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.timeline li { display: grid; grid-template-columns: 11rem minmax(0, 1fr); gap: 0.25rem 2rem; padding-block: 1.25rem; border-bottom: 1px solid var(--line); }
+.timeline h3 { margin-bottom: 0.2rem; }
+.timeline p { margin: 0; max-width: var(--measure); }
+.timeline p + p { margin-top: 0.5rem; }
+@media (max-width: 560px) { .timeline li { grid-template-columns: 1fr; } }
+
+/* Language switch and Chinese typography ------------------------------- */
+.nav-right { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1.5rem; }
+.lang-switch { display: inline-flex; border: 1.5px solid var(--line); border-radius: 999px; padding: 2px; }
+.lang-switch a { padding: 0.25rem 0.7rem; border-radius: 999px; color: var(--mist); text-decoration: none; font-weight: 500; font-size: 0.9rem; line-height: 1.4; }
+.lang-switch a:hover { color: var(--ink); }
+.lang-switch a[aria-current="true"] { background: var(--ink); color: var(--sky); }
+
+:lang(zh) {
+  --display: "Familjen Grotesk", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Heiti TC", sans-serif;
+}
+html:lang(zh) h1, html:lang(zh) h2, html:lang(zh) h3, html:lang(zh) .footer-big { letter-spacing: 0; }
+html:lang(zh) body { line-height: 1.75; }
+html:lang(zh) em, html:lang(zh) i { font-style: normal; font-weight: 700; }

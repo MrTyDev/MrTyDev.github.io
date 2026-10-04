@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro';
+import { lurl, t, type Lang } from '../i18n/ui';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const nf = t(lang).notFound;
+---
+<Base lang={lang} title={nf.title}>
+  <div class="wrap page-head">
+    <h1>{nf.heading}</h1>
+    <p class="lede">{nf.text} <a href={lurl(lang, '/')}>{nf.home}</a>.</p>
+  </div>
+</Base>

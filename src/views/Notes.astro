@@ -1,0 +1,26 @@
+---
+import Base from '../layouts/Base.astro';
+import { getNotes } from '../lib/projects';
+import { formatDate, lurl, t, type Lang } from '../i18n/ui';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const tr = t(lang);
+const notes = await getNotes(lang);
+---
+<Base lang={lang} title={tr.notesTitle} description={tr.notesIntro}>
+  <div class="wrap">
+    <header class="page-head">
+      <h1>{tr.notesTitle}</h1>
+      <p class="lede">{tr.notesIntro}</p>
+    </header>
+    <ul class="notes">
+      {notes.map((n) => (
+        <li><a href={lurl(lang, `/notes/${n.id}/`)}>
+          <time datetime={n.data.date.toISOString()}>{formatDate(lang, n.data.date)}</time>
+          <div><h3>{n.data.title}</h3><p>{n.data.summary}</p></div>
+        </a></li>
+      ))}
+    </ul>
+  </div>
+</Base>

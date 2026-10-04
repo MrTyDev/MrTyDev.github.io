@@ -1,20 +1,25 @@
 ---
-import { getCollection } from 'astro:content';
-import { server } from '../data/site';
-import { url } from '../lib/url';
+import { getContent } from '../data/site';
+import { getProjects } from '../lib/projects';
+import { lurl, t, type Lang } from '../i18n/ui';
 
-const units = (await getCollection('projects', (p) => !!p.data.rack))
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const tr = t(lang);
+const extras = getContent(lang).extras;
+const units = (await getProjects(lang))
+  .filter((p) => p.data.rack)
   .sort((a, b) => a.data.rack!.order - b.data.rack!.order);
 ---
-<div class="rack" role="list" aria-label={`Services running on ${server.name}`}>
+<div class="rack" role="list" aria-label={tr.rackLabel}>
   {units.map((p, i) => (
-    <a class="unit" role="listitem" href={url(`/projects/${p.id}/`)} style={`--tag: var(--c-${p.data.tags[0]}); --d: ${i * 0.7}s`}>
+    <a class="unit" role="listitem" href={lurl(lang, `/projects/${p.id}/`)} style={`--tag: var(--c-${p.data.tags[0]}); --d: ${i * 0.7}s`}>
       <span class="led" aria-hidden="true"></span>
-      <span><strong>{p.data.title}</strong><small>Replaces: {p.data.rack!.replaces}</small></span>
+      <span><strong>{p.data.title}</strong><small>{tr.replaces}: {p.data.rack!.replaces}</small></span>
       <span class="port" aria-hidden="true">u{String(i + 1).padStart(2, '0')}</span>
     </a>
   ))}
-  {server.extras.map((name, i) => (
+  {extras.map((name, i) => (
     <div class="unit dim" role="listitem" style={`--d: ${(units.length + i) * 0.7}s`}>
       <span class="led" aria-hidden="true"></span>
       <span><strong>{name}</strong></span>

@@ -1,6 +1,10 @@
 ---
-import { url } from '../lib/url';
 import { site } from '../data/site';
+import { lurl, t, type Lang } from '../i18n/ui';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const h = t(lang).hero;
 ---
 <section class="hero wrap" aria-labelledby="hero-title">
   <div class="viewfinder" id="viewfinder">
@@ -9,19 +13,13 @@ import { site } from '../data/site';
     <p class="hud mono" aria-hidden="true"><span class="rec"></span>live, 60 fps</p>
 
     <h1 id="hero-title">
-      Hi, I’m <span class="det" data-label="person 0.99">Alexander</span>.
-      I teach computers to <span class="det" data-label="computer_vision 0.97">see</span>,
-      then <span class="det" data-label="explainable_ai 0.96">check</span> what they were looking at.
+      {h.pre}<span class="det" data-label="person 0.99">{h.name}</span>{h.mid1}<span class="det" data-label="computer_vision 0.97">{h.see}</span>{h.mid2}<span class="det" data-label="explainable_ai 0.96">{h.check}</span>{h.post}
     </h1>
 
-    <p class="intro">
-      MSc student in AI and machine learning at BTH in Karlskrona. I build vision systems
-      for cheap hardware, like a drone interceptor that runs at 60 FPS on a Raspberry Pi,
-      and I tinker with edge AI on a server in my apartment.
-    </p>
+    <p class="intro">{h.intro}</p>
     <p class="actions">
-      <a class="btn primary" href={url('/#projects')}>See what I’ve built</a>
-      <a class="btn" href={`mailto:${site.email}`}>Email me</a>
+      <a class="btn primary" href={lurl(lang, '/#projects')}>{h.cta}</a>
+      <a class="btn" href={`mailto:${site.email}`}>{h.email}</a>
     </p>
 
     <div class="tracker" id="tracker" aria-hidden="true"><span class="mono">tracking</span></div>

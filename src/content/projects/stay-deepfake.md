@@ -5,11 +5,11 @@ role: Pair project with Jeet Purohit, Deep Machine Learning
 when: May 2026
 order: 2
 date: 2026-05-24
-tags: [xai]
+tags: [xai, research]
 featured: true
 cover: ./images/stay-deepfake-gradcam.jpg
 coverAlt: Two Grad-CAM heatmaps of the same news anchor. On the left the heat sits on the studio logos, on the right on the face.
-coverCaption: "Grad-CAM on the same fake image. Left: the published detector, reading the studio logos. Right: ours, reading the face."
+coverCaption: "Grad-CAM on the same fake image. Left: the published detector, reading the studio logos. Right: ours, reading the face. Frames from the FaceForensics++ dataset (Rössler et al., 2019), figures from our paper."
 evidenceTitle: In short
 evidence:
   - { label: What changed, value: "The model's attention moved from the background to the face" }
@@ -19,7 +19,7 @@ evidence:
 stack: [PyTorch, ResNet-18, OpenCV, Grad-CAM, LIME, FaceForensics++]
 gallery:
   - { src: ./images/stay-deepfake-before.jpg, alt: "The diffusion-based detector on a deepfake image. Grad-CAM heat sits on the studio logos, and the prediction is wrong.", caption: "The published detector on a fake image. Grad-CAM puts the heat on the studio logos, LIME agrees, and the model calls it real." }
-  - { src: ./images/stay-deepfake-after.jpg, alt: "Stay-Deepfake on the same image. Grad-CAM heat sits on the face, and the prediction is correct.", caption: "Ours on the same image. The heat has moved to the face, and it gets the answer right." }
+  - { src: ./images/stay-deepfake-after.jpg, alt: "Stay-Deepfake on the same image. Grad-CAM heat sits on the face, and the prediction is correct.", caption: "Ours on the same image. The heat has moved to the face, and it gets the answer right. Frames from FaceForensics++ (Rössler et al., 2019)." }
 ---
 
 Deepfake detectors score well on benchmarks and then fail on real images. We wanted to know why, so we ran Grad-CAM and LIME on two state-of-the-art models.

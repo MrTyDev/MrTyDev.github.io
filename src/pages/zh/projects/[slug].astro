@@ -1,12 +1,12 @@
 ---
-import ProjectPage from '../../views/ProjectPage.astro';
-import { getProjects } from '../../lib/projects';
+import ProjectPage from '../../../views/ProjectPage.astro';
+import { getProjects } from '../../../lib/projects';
 
 export async function getStaticPaths() {
   // Newer/older navigation follows the project date, not the home-page order.
-  const all = (await getProjects('en')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  const all = (await getProjects('zh')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
   return all.map((project, i) => ({ params: { slug: project.id }, props: { project, prev: all[i - 1], next: all[i + 1] } }));
 }
 const { project, prev, next } = Astro.props;
 ---
-<ProjectPage lang="en" project={project} prev={prev} next={next} />
+<ProjectPage lang="zh" project={project} prev={prev} next={next} />

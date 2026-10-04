@@ -1,0 +1,92 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import Rack from '../components/Rack.astro';
+import dashboard from '../assets/server-dashboard.jpg';
+import { TAGS, type Tag } from '../content.config';
+import { getContent } from '../data/site';
+import { getNotes, getProjects } from '../lib/projects';
+import { formatDate, lurl, t, type Lang } from '../i18n/ui';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const tr = t(lang);
+const c = getContent(lang);
+const projects = await getProjects(lang);
+const notes = (await getNotes(lang)).slice(0, 3);
+---
+<Base lang={lang}>
+  <Hero lang={lang} />
+
+  <section class="section wrap" aria-labelledby="now-title">
+    <h2 id="now-title" class="visually-small">{tr.now}</h2>
+    <dl class="now">
+      {c.now.map((n) => <div><dt>{n.label}</dt><dd>{n.text}</dd></div>)}
+    </dl>
+  </section>
+
+  <section class="section wrap" id="projects" aria-labelledby="projects-title">
+    <div class="section-head">
+      <div>
+        <h2 id="projects-title">{tr.projectsTitle}</h2>
+        <p>{tr.projectsIntro}</p>
+      </div>
+      <div class="filters" role="group" aria-label={tr.filterLabel}>
+        <button class="chip" aria-pressed="true" data-filter="all">{tr.all}</button>
+        {(Object.keys(TAGS) as Tag[]).map((k) => <button class="chip" aria-pressed="false" data-filter={k}>{tr.tags[k]}</button>)}
+      </div>
+    </div>
+    <div class="grid" id="project-grid">
+      {projects.map((p) => <ProjectCard project={p} lang={lang} />)}
+    </div>
+  </section>
+
+  <section class="section wrap" id="homelab" aria-labelledby="lab-title">
+    <div class="lab">
+      <div class="lab-text">
+        <h2 id="lab-title">{tr.labTitle}</h2>
+        {tr.labText.map((p) => <p>{p}</p>)}
+        <dl class="specs">
+          {c.specs.map((s) => <><dt>{s.label}</dt><dd>{s.value}</dd></>)}
+        </dl>
+        <figure class="shot">
+          <Image src={dashboard} alt={tr.dashboardAlt} widths={[480, 900]} sizes="(max-width: 860px) 100vw, 40vw" />
+          <figcaption>{tr.dashboardCaption}</figcaption>
+        </figure>
+      </div>
+      <Rack lang={lang} />
+    </div>
+  </section>
+
+  <section class="section wrap" aria-labelledby="notes-title">
+    <div class="section-head">
+      <h2 id="notes-title">{tr.notesTitle}</h2>
+      <a href={lurl(lang, '/notes/')}>{tr.allNotes}</a>
+    </div>
+    <ul class="notes">
+      {notes.map((n) => (
+        <li><a href={lurl(lang, `/notes/${n.id}/`)}>
+          <time datetime={n.data.date.toISOString()}>{formatDate(lang, n.data.date)}</time>
+          <div><h3>{n.data.title}</h3><p>{n.data.summary}</p></div>
+        </a></li>
+      ))}
+    </ul>
+  </section>
+</Base>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('[data-filter]');
+  const cards = document.querySelectorAll<HTMLElement>('#project-grid .card');
+  buttons.forEach((btn) => btn.addEventListener('click', () => {
+    const f = btn.dataset.filter!;
+    buttons.forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+    cards.forEach((c) => { c.hidden = f !== 'all' && !c.dataset.tags!.split(' ').includes(f); });
+  }));
+</script>
+
+<style>
+  .visually-small { font-size: 1rem; letter-spacing: 0; margin-bottom: 0.9rem; color: var(--mist); font-weight: 500; }
+  .card[hidden] { display: none; }
+</style>

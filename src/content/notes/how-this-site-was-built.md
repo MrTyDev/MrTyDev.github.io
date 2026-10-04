@@ -10,6 +10,8 @@ I started by handing over my CV. Then I let it look around the server and read t
 
 The first version looked like a CV pasted into a web page. I said so, and we rebuilt it with a clearer idea: this is a person who teaches computers to see, so the site should look like what a model sees.
 
+The AI made mistakes too, and some of them only I could catch: three of the photos it found showed another team's drones, and at one point it framed my deepfake research around accuracy, when the real point is where the model looks. Every correction is written down in the AI interaction log for the assignment.
+
 ## Adding things
 
-Everything is Markdown. A new project is one file in `src/content/projects/`, and a new note is one file in `src/content/notes/`. The site is built with Astro and deployed to GitHub Pages every time I push.
+Everything is Markdown. A new project is one file in `src/content/projects/`, with its Chinese translation in `src/content/projects-zh/`, and a new note is one file in `src/content/notes/`. The site is built with Astro and deployed to GitHub Pages every time I push.

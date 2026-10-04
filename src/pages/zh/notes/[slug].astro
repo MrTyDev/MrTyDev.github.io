@@ -1,0 +1,10 @@
+---
+import NoteView from '../../../views/Note.astro';
+import { getNotes } from '../../../lib/projects';
+
+export async function getStaticPaths() {
+  return (await getNotes('zh')).map((note) => ({ params: { slug: note.id }, props: { note } }));
+}
+const { note } = Astro.props;
+---
+<NoteView lang="zh" note={note} />
