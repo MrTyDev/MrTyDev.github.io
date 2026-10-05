@@ -73,6 +73,8 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 img { max-width: 100%; height: auto; display: block; }
+/* The `hidden` attribute must always win, e.g. over `.card { display: flex }`. */
+[hidden] { display: none !important; }
 a { color: var(--lock); text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
 a:hover { text-decoration-thickness: 2px; }
 :focus-visible { outline: 2px solid var(--detect); outline-offset: 3px; border-radius: 3px; }
