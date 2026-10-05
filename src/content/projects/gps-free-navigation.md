@@ -16,6 +16,8 @@ evidence:
   - { label: Drift after 120 s, value: "75 m, against 120 m" }
   - { label: Wind estimate, value: "Locked onto the true wind on 9 of 10 flights" }
   - { label: Flown, value: "63 simulated flights, 6 hours, 233,000 rows" }
+links:
+  - { label: "Read the paper (PDF)", url: "https://mrtydev.github.io/papers/gps-denied-navigation-alfaro-2026.pdf" }
 stack: [Python, scikit-learn, Optuna, SHAP, PX4 SITL, Gazebo]
 gallery:
   - { src: ./images/gps-wind-lock.jpg, alt: "Two density plots of predicted wind speed, with the GPS-aided and GPS-denied curves peaking on the true wind value", caption: "The wind estimator with GPS, and with GPS replaced by the corrected IMU. Both peaks still sit on the true wind." }
@@ -41,3 +43,5 @@ The third model was supposed to predict airspeed, and it failed. I could have re
 A quick test with a small neural network did better than both, which says the signal is in the data but classical regression can't pull it out. The task needs representation learning, and I wrote that down rather than dressing up a number.
 
 I used SHAP throughout to check which features each model was actually using, and Optuna to tune them.
+
+[Read the full paper (PDF)](/papers/gps-denied-navigation-alfaro-2026.pdf).

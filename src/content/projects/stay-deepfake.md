@@ -16,6 +16,8 @@ evidence:
   - { label: How, value: "A non-negativity constraint on the classification head" }
   - { label: Verified with, value: "Grad-CAM and LIME, not just a test score" }
   - { label: Not the point, value: "Accuracy rose 49% to 73%, on a model we never had time to tune" }
+links:
+  - { label: "Read the paper (PDF)", url: "https://mrtydev.github.io/papers/stay-deepfake-purohit-alfaro-2026.pdf" }
 stack: [PyTorch, ResNet-18, OpenCV, Grad-CAM, LIME, FaceForensics++]
 gallery:
   - { src: ./images/stay-deepfake-before.jpg, alt: "The diffusion-based detector on a deepfake image. Grad-CAM heat sits on the studio logos, and the prediction is wrong.", caption: "The published detector on a fake image. Grad-CAM puts the heat on the studio logos, LIME agrees, and the model calls it real." }
@@ -37,3 +39,5 @@ The mechanism is a constraint rather than more training. We freeze the feature l
 They went up, from 49% to 73% on full uncropped images, with recall from 47% to 99%. I don't think that's the interesting part, and I wouldn't lean on it.
 
 This was a course project on a deadline. We never got to optimise the model, tune it properly, or run an ablation study, so the scores say more about how little time we had than about how good the architecture is. What the scores can't explain away is *where the model is looking*, and that is what we set out to change.
+
+[Read the full paper (PDF)](/papers/stay-deepfake-purohit-alfaro-2026.pdf), written with Jeet Purohit.
