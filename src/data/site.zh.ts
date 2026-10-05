@@ -33,7 +33,7 @@ export const zh = {
       role: '軟體開發工程師',
       org: 'IKEA / Ingka 集團',
       when: '2025 年 8 月至 12 月',
-      text: '開發一個 Model Context Protocol 伺服器，讓 AI 模型能讀取內部的可觀測性文件，並自訂測試標準、比較 GPT 與 Claude 的工具使用能力。',
+      text: '開發一個 Model Context Protocol 伺服器，幫助 AI 助理從新舊混雜的文件中找出最新的可觀測性標準並導入專案，資深工程師的導入時間從數週縮短到數小時。',
       link: '/projects/ingka-mcp/',
     },
   ],

@@ -54,7 +54,7 @@ const en = {
       role: 'Software developer',
       org: 'IKEA / Ingka Group',
       when: 'Aug – Dec 2025',
-      text: 'Built a Model Context Protocol server that lets AI models read internal observability documentation, with its own test standards and a GPT vs Claude tool-use benchmark.',
+      text: 'Built a Model Context Protocol server that helps AI assistants find the current observability standard among outdated documents and implement it. Senior developers went from weeks to hours.',
       link: '/projects/ingka-mcp/',
     },
   ],

@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">
+  <title>How the MCP server finds the current observability standard</title>
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#fff" stroke-opacity="0.06"/>
+    </pattern>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#c9c3ff"/>
+    </marker>
+    <marker id="arrow-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#ff9f1c"/>
+    </marker>
+  </defs>
+  <rect width="1600" height="900" fill="#17163a"/>
+  <rect width="1600" height="900" fill="url(#grid)"/>
+
+  <!-- Everything important stays inside the middle band (y 150-750), so the
+       wide crop on the project page and the 16:9 card both show it. -->
+
+  <!-- 1. Developer -->
+  <g transform="translate(70 330)">
+    <rect width="300" height="200" rx="14" fill="#25244f" stroke="#4a4790" stroke-width="2"/>
+    <circle cx="150" cy="62" r="24" fill="none" stroke="#c9c3ff" stroke-width="4"/>
+    <path d="M104 128c8-26 26-38 46-38s38 12 46 38" fill="none" stroke="#c9c3ff" stroke-width="4" stroke-linecap="round"/>
+    <text x="150" y="168" fill="#fff" font-size="26" font-weight="700" text-anchor="middle">Senior developer</text>
+  </g>
+
+  <!-- 2. AI assistant -->
+  <g transform="translate(450 330)">
+    <rect width="300" height="200" rx="14" fill="#25244f" stroke="#4a4790" stroke-width="2"/>
+    <text x="150" y="88" fill="#fff" font-size="30" font-weight="700" text-anchor="middle">AI assistant</text>
+    <text x="150" y="128" fill="#c9c3ff" font-size="22" text-anchor="middle">Claude or GPT</text>
+  </g>
+
+  <!-- 3. MCP server -->
+  <g transform="translate(830 310)">
+    <rect width="320" height="240" rx="14" fill="#6b4fd8" stroke="#8f7aff" stroke-width="2"/>
+    <text x="160" y="72" fill="#fff" font-size="30" font-weight="700" text-anchor="middle">MCP server</text>
+    <rect x="34" y="102" width="252" height="40" rx="8" fill="#fff" fill-opacity="0.16"/>
+    <text x="160" y="129" fill="#fff" font-size="20" text-anchor="middle">tools</text>
+    <rect x="34" y="154" width="252" height="40" rx="8" fill="#fff" fill-opacity="0.16"/>
+    <text x="160" y="181" fill="#fff" font-size="20" text-anchor="middle">tuned instructions</text>
+  </g>
+
+  <!-- 4. Documentation: many versions, one current -->
+  <g transform="translate(1240 212)">
+    <text x="145" y="0" fill="#c9c3ff" font-size="20" text-anchor="middle">Observability docs</text>
+    <g fill="#25244f" stroke="#4a4790" stroke-width="2">
+      <rect x="20" y="28" width="250" height="62" rx="8"/>
+      <rect x="20" y="104" width="250" height="62" rx="8"/>
+      <rect x="20" y="318" width="250" height="62" rx="8"/>
+      <rect x="20" y="394" width="250" height="62" rx="8"/>
+    </g>
+    <g fill="#8a86c4" font-size="19">
+      <text x="44" y="66">outdated</text>
+      <text x="44" y="142">outdated</text>
+      <text x="44" y="356">outdated</text>
+      <text x="44" y="432">outdated</text>
+    </g>
+    <g stroke="#8a86c4" stroke-width="2.5" stroke-linecap="round">
+      <path d="M200 46l40 26M240 46l-40 26"/>
+      <path d="M200 122l40 26M240 122l-40 26"/>
+      <path d="M200 336l40 26M240 336l-40 26"/>
+      <path d="M200 412l40 26M240 412l-40 26"/>
+    </g>
+    <!-- The current standard, "detected" like everything else on the site -->
+    <rect x="20" y="230" width="250" height="62" rx="8" fill="#fff"/>
+    <text x="44" y="269" fill="#17163a" font-size="20" font-weight="700">current standard</text>
+    <rect x="10" y="220" width="270" height="82" rx="6" fill="none" stroke="#ff9f1c" stroke-width="4"/>
+    <rect x="8" y="188" width="232" height="32" rx="4" fill="#ff9f1c"/>
+    <text x="18" y="211" fill="#1b1300" font-size="19" font-family="IBM Plex Mono, Menlo, monospace">up_to_date 0.98</text>
+  </g>
+
+  <!-- Arrows -->
+  <g stroke="#c9c3ff" stroke-width="3.5" fill="none" marker-end="url(#arrow)">
+    <path d="M376 410H442"/>
+    <path d="M756 410H822"/>
+    <path d="M1156 473H1240"/>
+  </g>
+  <!-- Answer path back to the developer -->
+  <path d="M1385 676V704H220V538" stroke="#ff9f1c" stroke-width="3.5" fill="none" stroke-dasharray="10 9" marker-end="url(#arrow-amber)"/>
+  <text x="800" y="740" fill="#ffd28a" font-size="22" text-anchor="middle">the current standard, implemented in the developer’s project</text>
+</svg>
