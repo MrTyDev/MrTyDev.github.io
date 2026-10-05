@@ -30,7 +30,7 @@ export function formatDate(lang: Lang, d: Date, long = false): string {
 const en = {
   siteTitle: 'AI & machine learning',
   skip: 'Skip to content',
-  nav: { projects: 'Projects', homelab: 'Homelab', notes: 'Notes', about: 'About' },
+  nav: { projects: 'Projects', homelab: 'Homelab', notes: 'Notes', about: 'About', contact: 'Contact' },
   navLabel: 'Main',
   langLabel: 'Language',
   darkMode: 'Dark mode',
@@ -100,7 +100,7 @@ type Dict = typeof en;
 const zh: Dict = {
   siteTitle: 'AI 與機器學習',
   skip: '跳到主要內容',
-  nav: { projects: '作品', homelab: '自架伺服器', notes: '筆記', about: '關於我' },
+  nav: { projects: '作品', homelab: '自架伺服器', notes: '筆記', about: '關於我', contact: '聯絡' },
   navLabel: '主選單',
   langLabel: '語言',
   darkMode: '深色模式',

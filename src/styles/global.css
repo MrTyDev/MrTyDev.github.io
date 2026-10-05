@@ -275,3 +275,7 @@ html:lang(zh) em, html:lang(zh) i { font-style: normal; font-weight: 700; }
 .clip-figure { margin: 2rem 0 0; max-width: 40rem; }
 .clip-figure video { width: 100%; height: auto; display: block; border-radius: var(--r); background: #000; }
 .clip-figure figcaption { color: var(--mist); font-size: 0.9rem; margin-top: 0.6rem; }
+@media (max-width: 440px) {
+  .nav-links { gap: 0.25rem 0.9rem; }
+  .nav-links a { font-size: 0.95rem; }
+}
