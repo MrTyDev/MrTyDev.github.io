@@ -26,7 +26,7 @@ gallery:
 
 Deepfake detectors score well on benchmarks and then fail on real images. We wanted to know why, so we ran Grad-CAM and LIME on two state-of-the-art models.
 
-They weren't looking at the face. They were reading the **background**: studio logos and on-screen text. Whatever those benchmark numbers measured, it wasn't the ability to spot a manipulation.
+They weren't looking at the face. They were reading the **background**: studio logos and on-screen text in our figures, and compression texture, a shortcut earlier work has already shown. Whatever those benchmark numbers measured, it wasn't the ability to spot a manipulation.
 
 ## The contribution
 
