@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import { render } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Cover from '../components/Cover.astro';
+import Clip from '../components/Clip.astro';
 import type { Project } from '../lib/projects';
 import { lurl, t, type Lang } from '../i18n/ui';
 
@@ -32,6 +33,12 @@ const d = project.data;
     <div class="article">
       <div>
         <div class="prose"><Content /></div>
+        {d.clip && (
+          <figure class="clip-figure">
+            <Clip src={d.clip.src} alt={d.clip.alt} controls />
+            {d.clip.caption && <figcaption>{d.clip.caption}</figcaption>}
+          </figure>
+        )}
         {d.gallery.length > 0 && (
           <div class="gallery">
             {d.gallery.map((g) => (

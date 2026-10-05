@@ -22,13 +22,14 @@ export async function getProjects(lang: Lang): Promise<Project[]> {
     .map((p) => {
       const tr = zh.get(p.id) as CollectionEntry<'projectsZh'> | undefined;
       if (!tr) return { id: p.id, data: p.data, body: p };
-      const { linkLabels, galleryAlts, galleryCaptions, rackReplaces, ...text } = tr.data;
+      const { linkLabels, galleryAlts, galleryCaptions, rackReplaces, clipAlt, clipCaption, ...text } = tr.data;
       const data: ProjectData = {
         ...p.data,
         ...defined(text),
         links: p.data.links.map((l, i) => ({ ...l, label: linkLabels?.[i] ?? l.label })),
         gallery: p.data.gallery.map((g, i) => ({ ...g, alt: galleryAlts?.[i] ?? g.alt, caption: galleryCaptions?.[i] ?? g.caption })),
         rack: p.data.rack && { ...p.data.rack, replaces: rackReplaces ?? p.data.rack.replaces },
+        clip: p.data.clip && { ...p.data.clip, alt: clipAlt ?? p.data.clip.alt, caption: clipCaption ?? p.data.clip.caption },
       };
       return { id: p.id, data, body: tr.body?.trim() ? tr : p };
     })

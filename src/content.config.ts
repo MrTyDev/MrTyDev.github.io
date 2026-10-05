@@ -40,6 +40,9 @@ const projects = defineCollection({
       gallery: z
         .array(z.object({ src: image(), srcDark: image().optional(), alt: z.string(), caption: z.string().optional(), phone: z.boolean().default(false) }))
         .default([]),
+      // A short looping video (a converted GIF) in public/media/, without extension:
+      // `/media/name` means /media/name.mp4, .webm and .jpg (the still frame).
+      clip: z.object({ src: z.string(), alt: z.string(), caption: z.string().optional() }).optional(),
       // Set this to show the project as a unit in the homelab rack.
       rack: z.object({ replaces: z.string(), order: z.number() }).optional(),
     }),
@@ -72,6 +75,8 @@ const projectsZh = defineCollection({
     galleryAlts: z.array(z.string()).optional(), // same order as the English gallery
     galleryCaptions: z.array(z.string()).optional(),
     rackReplaces: z.string().optional(),
+    clipAlt: z.string().optional(),
+    clipCaption: z.string().optional(),
   }),
 });
 

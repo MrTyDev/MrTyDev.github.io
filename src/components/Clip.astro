@@ -1,0 +1,18 @@
+---
+// A short silent loop (a converted GIF). Plays like a GIF, but is a fraction
+// of the size. Visitors who prefer reduced motion get the still frame.
+import { url } from '../lib/url';
+
+interface Props { src: string; alt: string; controls?: boolean }
+const { src, alt, controls = false } = Astro.props;
+---
+<video class="clip" data-clip autoplay muted loop playsinline preload="metadata" poster={url(`${src}.jpg`)} aria-label={alt} controls={controls}>
+  <source src={url(`${src}.webm`)} type="video/webm" />
+  <source src={url(`${src}.mp4`)} type="video/mp4" />
+</video>
+
+<script>
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll<HTMLVideoElement>('video[data-clip]').forEach((v) => { v.removeAttribute('autoplay'); v.pause(); });
+  }
+</script>

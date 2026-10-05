@@ -9,7 +9,7 @@ const { title, summary, tags, featured } = project.data;
 const tagLabels = t(lang).tags;
 ---
 <a class:list={['card', { 'is-featured': featured }]} href={lurl(lang, `/projects/${project.id}/`)} data-tags={tags.join(' ')}>
-  <Cover project={project} />
+  <Cover project={project} useClip />
   <div class="card-body">
     <h3>{title}</h3>
     <p>{summary}</p>
