@@ -23,6 +23,10 @@ const others = (Object.keys(LANGS) as Lang[]).map((l) => ({ lang: l, href: switc
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script is:inline>
+    // Apply a saved theme before the first paint, so there's no flash.
+    try { const t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t; } catch {}
+  </script>
   <title>{pageTitle}</title>
   <meta name="description" content={description} />
   <meta property="og:title" content={pageTitle} />
@@ -47,6 +51,10 @@ const others = (Object.keys(LANGS) as Lang[]).map((l) => ({ lang: l, href: switc
           return <a href={href} aria-current={!n.href.includes('#') && path.startsWith(href) ? 'page' : undefined}>{n.label}</a>;
         })}
       </nav>
+      <button class="theme-toggle" type="button" aria-pressed="false" aria-label={tr.darkMode} title={tr.darkMode}>
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4 8.5 8.5 0 1 0 20 14.5Z"/></svg>
+      </button>
       <nav class="lang-switch" aria-label={tr.langLabel}>
         {others.map((o) => (
           <a href={o.href} hreflang={o.html} lang={o.html} aria-current={o.lang === lang ? 'true' : undefined} title={o.label}>{o.short}</a>
@@ -65,5 +73,24 @@ const others = (Object.keys(LANGS) as Lang[]).map((l) => ({ lang: l, href: switc
       </div>
     </div>
   </footer>
+  <script is:inline>
+    // Light/dark toggle. Starts from the system setting; a click overrides it
+    // and is remembered on this device.
+    (() => {
+      const btn = document.querySelector('.theme-toggle');
+      const root = document.documentElement;
+      const sysDark = window.matchMedia('(prefers-color-scheme: dark)');
+      const isDark = () => (root.dataset.theme ? root.dataset.theme === 'dark' : sysDark.matches);
+      const sync = () => btn.setAttribute('aria-pressed', String(isDark()));
+      btn.addEventListener('click', () => {
+        const next = isDark() ? 'light' : 'dark';
+        root.dataset.theme = next;
+        try { localStorage.setItem('theme', next); } catch {}
+        sync();
+      });
+      sysDark.addEventListener('change', sync);
+      sync();
+    })();
+  </script>
 </body>
 </html>

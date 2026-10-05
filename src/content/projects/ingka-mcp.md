@@ -6,7 +6,8 @@ when: Aug – Dec 2025
 order: 7
 date: 2025-12-01
 tags: [llm]
-cover: ./images/ingka-flow.svg
+cover: ./images/ingka-flow-light.svg
+coverDark: ./images/ingka-flow-dark.svg
 coverAlt: "Diagram: a senior developer asks an AI assistant, which uses the MCP server to pick the one current standard out of several outdated documents and implement it in the developer's project"
 coverCaption: How it works. A diagram drawn for this site, because the product itself is under NDA.
 evidenceTitle: In short
@@ -17,7 +18,7 @@ evidence:
   - { label: Verified by, value: Senior developers at Ingka }
 stack: [Model Context Protocol, Claude, GPT]
 gallery:
-  - { src: ./images/ingka-testing.svg, alt: "Diagram: five example prompts from very specific to very vague, next to a loop of testing, comparing models and refining the server's instructions", caption: "How we tested: five ways of asking, and a loop of testing, comparing models and refining the server's instructions. Our metrics stay under NDA." }
+  - { src: ./images/ingka-testing-light.svg, srcDark: ./images/ingka-testing-dark.svg, alt: "Diagram: five example prompts from very specific to very vague, next to a loop of testing, comparing models and refining the server's instructions", caption: "How we tested: five ways of asking, and a loop of testing, comparing models and refining the server's instructions. Our metrics stay under NDA." }
 ---
 
 Ingka's documentation holds both current and outdated observability standards, and a model that picks the wrong one is worse than no model at all. I built a Model Context Protocol server that lets an AI assistant find the up-to-date standard and implement it in a senior developer's project.

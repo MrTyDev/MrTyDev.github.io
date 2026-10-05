@@ -21,18 +21,43 @@
   --wrap: 76rem;
   --gutter: clamp(1rem, 4vw, 2.75rem);
   --r: 10px;
-  color-scheme: light dark;
+  --footer-bg: #10233a;
+  color-scheme: light;
 }
+/* Dark theme: follows the system unless the visitor picked a theme with the
+   toggle, which sets data-theme on <html>. */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --sky: #0f1c2a;
     --surface: #16273a;
     --ink: #e8f0f5;
     --mist: #97aabb;
     --line: #25384d;
     --lock: #3fd1c3;
+    --footer-bg: #0a131d;
+    color-scheme: dark;
   }
 }
+:root[data-theme="dark"] {
+  --footer-bg: #0a131d;
+  --sky: #0f1c2a;
+  --surface: #16273a;
+  --ink: #e8f0f5;
+  --mist: #97aabb;
+  --line: #25384d;
+  --lock: #3fd1c3;
+  color-scheme: dark;
+}
+
+/* Images that exist in a light and a dark version. !important so these
+   utilities win over element rules like `.cover img { display: block }`. */
+.theme-dark { display: none !important; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-light { display: none !important; }
+  :root:not([data-theme="light"]) .theme-dark { display: block !important; }
+}
+:root[data-theme="dark"] .theme-light { display: none !important; }
+:root[data-theme="dark"] .theme-dark { display: block !important; }
 
 /* Base ------------------------------------------------------------------ */
 *, *::before, *::after { box-sizing: border-box; }
@@ -157,11 +182,11 @@ a.unit:hover { background: #2d4058; }
 @media (max-width: 560px) { .notes a { grid-template-columns: 1fr; } }
 
 /* Footer ---------------------------------------------------------------- */
-.footer { margin-top: clamp(4rem, 10vw, 8rem); background: var(--ink); color: var(--sky); padding-block: clamp(3rem, 7vw, 5rem) 2rem; }
+.footer { margin-top: clamp(4rem, 10vw, 8rem); background: var(--footer-bg); color: #e9f1f6; padding-block: clamp(3rem, 7vw, 5rem) 2rem; }
 .footer a { color: inherit; }
 .footer-big { font-size: clamp(2.2rem, 6vw, 4.5rem); font-weight: 700; letter-spacing: -0.035em; line-height: 1; margin: 0 0 1.5rem; }
 .footer-mail { font-size: clamp(1.05rem, 2.4vw, 1.5rem); font-weight: 500; overflow-wrap: anywhere; }
-.footer-row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 1.25rem; border-top: 1px solid color-mix(in srgb, var(--sky) 20%, transparent); font-size: 0.9rem; opacity: 0.85; }
+.footer-row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 1.25rem; border-top: 1px solid rgba(233, 241, 246, 0.2); font-size: 0.9rem; opacity: 0.85; }
 .footer-row nav { display: flex; gap: 1.25rem; }
 
 /* Long-form pages (project, note, about) -------------------------------- */
@@ -230,3 +255,18 @@ a.unit:hover { background: #2d4058; }
 html:lang(zh) h1, html:lang(zh) h2, html:lang(zh) h3, html:lang(zh) .footer-big { letter-spacing: 0; }
 html:lang(zh) body { line-height: 1.75; }
 html:lang(zh) em, html:lang(zh) i { font-style: normal; font-weight: 700; }
+
+/* Theme toggle --------------------------------------------------------- */
+.theme-toggle {
+  display: inline-grid; place-items: center; width: 2.25rem; height: 2.25rem; padding: 0;
+  border: 1.5px solid var(--line); border-radius: 999px; background: transparent; color: var(--ink); cursor: pointer;
+}
+.theme-toggle:hover { border-color: var(--ink); }
+.theme-toggle svg { width: 1.1rem; height: 1.1rem; }
+.theme-toggle .moon { display: none; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-toggle .sun { display: none; }
+  :root:not([data-theme="light"]) .theme-toggle .moon { display: block; }
+}
+:root[data-theme="dark"] .theme-toggle .sun { display: none; }
+:root[data-theme="dark"] .theme-toggle .moon { display: block; }

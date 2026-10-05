@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">
+  <title>How the MCP server was tested: five levels of prompt specificity and a refinement loop</title>
+  <style>
+  .bg { fill: #17163a; }
+  .grid { stroke: #ffffff; stroke-opacity: 0.06; fill: none; }
+  .box { fill: #25244f; stroke: #4a4790; }
+  .ink { fill: #ffffff; }
+  .soft { fill: #c9c3ff; }
+  .soft-line { stroke: #c9c3ff; fill: none; }
+  .accent { fill: #6b4fd8; stroke: #8f7aff; }
+  .on-accent { fill: #ffffff; }
+  .on-accent-soft { fill: #e3ddff; }
+  .chip { fill: #ffffff; fill-opacity: 0.18; }
+  .doc { fill: #25244f; stroke: #4a4790; }
+  .doc-text { fill: #8a86c4; }
+  .cross { stroke: #8a86c4; fill: none; }
+  .card { fill: #ffffff; }
+  .card-text { fill: #17163a; }
+  .amber { fill: #ff9f1c; }
+  .amber-line { stroke: #ff9f1c; fill: none; }
+  .amber-text { fill: #1b1300; }
+  .arrow { stroke: #c9c3ff; fill: none; }
+  .arrow-head { fill: #c9c3ff; }
+  .note { fill: #ffd28a; }
+  .faint { fill: #8a86c4; }
+  .ring { stroke: #4a4790; fill: none; }
+</style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path class="arrow-head" d="M0 0L10 5L0 10z"/></marker>
+  </defs>
+  <rect class="bg" width="1600" height="900"/>
+
+  <text class="ink" x="70" y="96" font-size="32" font-weight="700">Five ways to ask</text>
+  <text class="soft" x="70" y="134" font-size="20">Every model was tested from very specific to very vague. Example phrasings.</text>
+
+  <g font-size="22">
+    <g transform="translate(70 180)">
+      <rect width="820" height="96" rx="12" fill="#6b4fd8"/>
+      <text class="on-accent-soft" x="28" y="40" font-size="17">1 · very specific</text>
+      <text class="on-accent" x="28" y="74">“Use the docs tool to get the current tracing standard.”</text>
+    </g>
+    <g transform="translate(70 290)">
+      <rect width="760" height="96" rx="12" fill="#5a45b8"/>
+      <text class="on-accent-soft" x="28" y="40" font-size="17">2</text>
+      <text class="on-accent" x="28" y="74">“Find the current tracing standard for my service.”</text>
+    </g>
+    <g transform="translate(70 400)">
+      <rect width="700" height="96" rx="12" fill="#4a3b98"/>
+      <text class="on-accent-soft" x="28" y="40" font-size="17">3</text>
+      <text class="on-accent" x="28" y="74">“How do I add tracing to this service?”</text>
+    </g>
+    <g transform="translate(70 510)">
+      <rect width="640" height="96" rx="12" fill="#3b3278"/>
+      <text class="on-accent-soft" x="28" y="40" font-size="17">4</text>
+      <text class="on-accent" x="28" y="74">“Make this service observable.”</text>
+    </g>
+    <g transform="translate(70 620)">
+      <rect width="580" height="96" rx="12" fill="#2d2860"/>
+      <text class="on-accent-soft" x="28" y="40" font-size="17">5 · very vague</text>
+      <text class="on-accent" x="28" y="74">“Something is wrong, help me fix it.”</text>
+    </g>
+  </g>
+
+  <text class="ink" x="1010" y="96" font-size="32" font-weight="700">The refinement loop</text>
+  <text class="soft" x="1010" y="134" font-size="20">Repeated until the numbers stopped improving.</text>
+
+  <g transform="translate(1250 440)">
+    <circle class="ring" r="190" stroke-width="2" stroke-dasharray="6 8"/>
+    <g transform="translate(0 -190)">
+      <rect class="accent" x="-180" y="-46" width="360" height="92" rx="14" stroke-width="0"/>
+      <text class="on-accent" y="-6" font-size="24" font-weight="700" text-anchor="middle">Test</text>
+      <text class="on-accent-soft" y="24" font-size="16" text-anchor="middle">right tool? accurate? understood the ask?</text>
+    </g>
+    <g transform="translate(165 95)">
+      <rect class="box" x="-120" y="-46" width="240" height="92" rx="14" stroke-width="2"/>
+      <text class="ink" y="-6" font-size="24" font-weight="700" text-anchor="middle">Compare</text>
+      <text class="soft" y="24" font-size="17" text-anchor="middle">several models</text>
+    </g>
+    <g transform="translate(-165 95)">
+      <rect class="box" x="-120" y="-46" width="240" height="92" rx="14" stroke-width="2"/>
+      <text class="ink" y="-6" font-size="24" font-weight="700" text-anchor="middle">Refine</text>
+      <text class="soft" y="24" font-size="17" text-anchor="middle">MCP instructions</text>
+    </g>
+    <g class="arrow" stroke-width="3" marker-end="url(#a)">
+      <path d="M140 -138 A190 190 0 0 1 188 30"/>
+      <path d="M48 160 A190 190 0 0 1 -48 160"/>
+      <path d="M-188 30 A190 190 0 0 1 -140 -138"/>
+    </g>
+  </g>
+
+  <g transform="translate(1010 740)">
+    <rect class="amber" width="520" height="58" rx="8"/>
+    <text class="amber-text" x="22" y="37" font-size="21" font-weight="700">Best at picking the right tool: Claude</text>
+  </g>
+  <text class="faint" x="1010" y="836" font-size="17">Our own metrics. The details are under NDA.</text>
+</svg>

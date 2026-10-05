@@ -36,7 +36,8 @@ const d = project.data;
           <div class="gallery">
             {d.gallery.map((g) => (
               <figure class={g.phone ? 'is-phone' : ''}>
-                <Image src={g.src} alt={g.alt} widths={[480, 900, 1400]} sizes="(max-width: 860px) 100vw, 60vw" />
+                <Image src={g.src} alt={g.alt} class={g.srcDark ? 'theme-light' : undefined} widths={[480, 900, 1400]} sizes="(max-width: 860px) 100vw, 60vw" />
+                {g.srcDark && <Image src={g.srcDark} alt="" class="theme-dark" widths={[480, 900, 1400]} sizes="(max-width: 860px) 100vw, 60vw" />}
                 {g.caption && <figcaption>{g.caption}</figcaption>}
               </figure>
             ))}

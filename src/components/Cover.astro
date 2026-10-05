@@ -6,7 +6,8 @@ import type { Project } from '../lib/projects';
 
 interface Props { project: Pick<Project, 'id' | 'data'>; eager?: boolean }
 const { project, eager = false } = Astro.props;
-const { cover, coverAlt, coverPosition, tags, title } = project.data;
+const { cover, coverDark, coverAlt, coverPosition, tags, title } = project.data;
+const imgProps = { alt: coverAlt ?? title, widths: [480, 800, 1200], sizes: '(max-width: 720px) 100vw, 50vw', loading: eager ? 'eager' : 'lazy' } as const;
 
 let h = 0;
 for (const ch of project.id) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
@@ -21,7 +22,14 @@ const gid = `g-${project.id}`;
 ---
 <div class="cover" style={`--tag: var(--c-${tags[0]}); --cover-pos: ${coverPosition === "top" ? "top center" : "center"}`}>
   {cover ? (
-    <Image src={cover} alt={coverAlt ?? title} widths={[480, 800, 1200]} sizes="(max-width: 720px) 100vw, 50vw" loading={eager ? 'eager' : 'lazy'} />
+    coverDark ? (
+      <>
+        <Image src={cover} class="theme-light" {...imgProps} />
+        <Image src={coverDark} class="theme-dark" {...imgProps} alt="" />
+      </>
+    ) : (
+      <Image src={cover} {...imgProps} />
+    )
   ) : (
     <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMid slice" aria-hidden="true">
       <defs>

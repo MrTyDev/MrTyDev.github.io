@@ -27,6 +27,7 @@ const projects = defineCollection({
       tags: z.array(tag).min(1),
       featured: z.boolean().default(false),
       cover: image().optional(),
+      coverDark: image().optional(), // optional dark-theme version of the cover
       coverAlt: z.string().optional(),
       // How to crop the cover: 'center' for photos, 'top' for screenshots.
       coverPosition: z.enum(['center', 'top']).default('center'),
@@ -37,7 +38,7 @@ const projects = defineCollection({
       stack: z.array(z.string()).default([]),
       // Pictures shown on the project page. `phone: true` for tall phone screenshots.
       gallery: z
-        .array(z.object({ src: image(), alt: z.string(), caption: z.string().optional(), phone: z.boolean().default(false) }))
+        .array(z.object({ src: image(), srcDark: image().optional(), alt: z.string(), caption: z.string().optional(), phone: z.boolean().default(false) }))
         .default([]),
       // Set this to show the project as a unit in the homelab rack.
       rack: z.object({ replaces: z.string(), order: z.number() }).optional(),
