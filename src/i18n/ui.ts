@@ -79,7 +79,7 @@ const en = {
     lede: 'I grew up in Sweden, study in Karlskrona, and I like it best when a model is small, fast and honest about what it looked at.',
     body: [
       'I’m in the last part of an MSc in engineering in AI and machine learning at Blekinge Institute of Technology. Most of my serious work has been in defence: computer vision for a counter-drone interceptor we built with FMV and the Marine Technology Center, and navigation for drones when GPS is jammed.',
-      'I got hooked on AI early. My upper-secondary diploma project in 2020, <a href="/papers/ai-in-our-daily-lives-alfaro-2020.pdf"><em>AI in our daily lives</em></a>, asked how human AI can become. I built a chatbot, first in C# with a Unity client and then as a neural network in Python, and had people talk to it. That was two years before ChatGPT.',
+      'I got hooked on AI early. My high-school graduation project in 2020, <a href="/papers/ai-in-our-daily-lives-alfaro-2020.pdf"><em>AI in our daily lives</em></a>, asked how human AI can become. I built a chatbot, first in C# with a Unity client and then as a neural network in Python, and had people talk to it. That was two years before ChatGPT.',
       'What ties it together is verification. A high score on a test set isn’t enough for me. I use SHAP, Grad-CAM and LIME to see <em>why</em> a model decides what it decides, and more than once that has shown the model was cheating.',
       'Outside school I tinker. I self-host the tools I would otherwise pay for and run local models on a 4 GB GPU.',
       'I’m a Swedish citizen and available for security vetting. Swedish is my first language, I’m fluent in English, and I’m currently on exchange in Taiwan, learning Mandarin.',

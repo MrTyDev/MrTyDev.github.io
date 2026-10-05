@@ -42,7 +42,7 @@ export const zh = {
 
   school: {
     name: 'LBS Trollhättan',
-    programme: '高中，科技學程',
+    programme: '高中，科技學程（遊戲程式設計方向）',
     year: '2020',
     detail: '畢業專題：《AI in our daily lives》，以聊天機器人實驗探討 AI 能變得多像人。',
     link: '/papers/ai-in-our-daily-lives-alfaro-2020.pdf',
