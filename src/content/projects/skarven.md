@@ -9,6 +9,7 @@ tags: [defence, edge]
 featured: true
 cover: ./images/skarven-drone.jpg
 coverAlt: The Skarven interceptor on a table at the FMV student challenge demo day
+clip: { src: /media/skarven-flight, alt: "Video: Skarven's tracker draws a detection box around a drone in the sky, then the test field with drones in the air, then the view from the interceptor's onboard camera", caption: "Flight test footage. First Skarven's tracker following a target drone, then the test field, then the interceptor's onboard camera." }
 gallery:
   - { src: ./images/skarven-team.jpg, alt: "Simon Lindqvist, Tobias Gustafsson, Viktor Fransson and Alexander Alfaro outside BTH", caption: "The team: Simon Lindqvist, Tobias Gustafsson, Viktor Fransson and me. Photo: Christian Hylse / Blekinge Läns Tidning." }
   - { src: ./images/skarven-demoday.jpg, alt: "Visitors at the student challenge demo day at BTH", caption: "Demo day at BTH, 14 November 2025, for FMV, the Armed Forces and the industry. Photo: BTH." }

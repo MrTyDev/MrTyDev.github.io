@@ -3,6 +3,8 @@ summary: 一台造價約 7,000 瑞典克朗的無人機，用電腦視覺找出�
 role: AI 工程師，四人團隊
 when: 2025 年 6 月至今
 coverAlt: 在 FMV 學生挑戰賽成果展上，放在桌上的 Skarven 攔截機
+clipAlt: 影片：Skarven 的追蹤器在天空中框住一架無人機，接著是有無人機飛行的試飛場，最後是攔截機機載鏡頭的畫面
+clipCaption: 試飛影片。先是 Skarven 的追蹤器鎖定目標無人機，接著是試飛場，最後是攔截機的機載鏡頭畫面。
 galleryAlts:
   - Simon Lindqvist、Tobias Gustafsson、Viktor Fransson 與 Alexander Alfaro 在 BTH 外合影
   - BTH 學生挑戰賽成果展的來賓
