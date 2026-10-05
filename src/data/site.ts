@@ -62,6 +62,16 @@ const en = {
   // Exchange semester. Leave school empty to hide the line.
   exchange: { school: 'Chang Gung University', place: 'Taoyuan, Taiwan', when: 'Autumn 2026' },
 
+  // Upper secondary school, shown under the degree on the About page.
+  school: {
+    name: 'LBS Trollhättan',
+    programme: 'Upper secondary school, Technology programme',
+    year: '2020',
+    detail: 'Diploma project: AI in our daily lives, a chatbot experiment on how human AI can become.',
+    link: '/papers/ai-in-our-daily-lives-alfaro-2020.pdf',
+    linkLabel: 'Read the project (PDF, in Swedish)',
+  },
+
   education: {
     degree: 'MSc in Engineering, AI and Machine Learning',
     school: 'Blekinge Institute of Technology, Karlskrona, Sweden',

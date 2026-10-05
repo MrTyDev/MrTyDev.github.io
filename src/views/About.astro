@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import { getContent, identity, site } from '../data/site';
 import { lurl, t, type Lang } from '../i18n/ui';
+import { url } from '../lib/url';
 
 interface Props { lang: Lang }
 const { lang } = Astro.props;
@@ -48,6 +49,7 @@ const c = getContent(lang);
       )}
       <p style="margin:0 0 1.5rem"><strong>{c.education.degree}</strong><br /><span class="muted">{c.education.school}{a.sep}{c.education.years}{a.end} {c.education.detail}</span></p>
       <dl class="rows">{c.education.courses.map((x) => <div><dt>{x.area}</dt><dd>{x.items}</dd></div>)}</dl>
+      <p style="margin:1.75rem 0 0"><strong>{c.school.programme}</strong><br /><span class="muted">{c.school.name}{a.sep}{c.school.year}{a.end} {c.school.detail}</span> <a href={url(c.school.link)}>{c.school.linkLabel}</a></p>
     </section>
 
     <section class="section">

@@ -79,6 +79,7 @@ const en = {
     lede: 'I grew up in Sweden, study in Karlskrona, and I like it best when a model is small, fast and honest about what it looked at.',
     body: [
       'I’m in the last part of an MSc in engineering in AI and machine learning at Blekinge Institute of Technology. Most of my serious work has been in defence: computer vision for a counter-drone interceptor we built with FMV and the Marine Technology Center, and navigation for drones when GPS is jammed.',
+      'I got hooked on AI early. My upper-secondary diploma project in 2020, <a href="/papers/ai-in-our-daily-lives-alfaro-2020.pdf"><em>AI in our daily lives</em></a>, asked how human AI can become. I built a chatbot, first in C# with a Unity client and then as a neural network in Python, and had people talk to it. That was two years before ChatGPT.',
       'What ties it together is verification. A high score on a test set isn’t enough for me. I use SHAP, Grad-CAM and LIME to see <em>why</em> a model decides what it decides, and more than once that has shown the model was cheating.',
       'Outside school I tinker. I self-host the tools I would otherwise pay for and run local models on a 4 GB GPU.',
       'I’m a Swedish citizen and available for security vetting. Swedish is my first language, I’m fluent in English, and I’m currently on exchange in Taiwan, learning Mandarin.',
@@ -149,6 +150,7 @@ const zh: Dict = {
     lede: '我在瑞典長大，在卡爾斯克魯納念書。我最喜歡的模型是小、快，而且誠實交代自己看了什麼的那種。',
     body: [
       '我正在瑞典布萊金厄理工學院（Blekinge Institute of Technology）攻讀人工智慧與機器學習工程碩士，目前在最後階段。我最主要的作品都和國防有關：與瑞典國防物資管理局（FMV）及海洋科技中心（MTC）合作的反無人機攔截機的電腦視覺，以及在 GPS 被干擾時無人機的導航。',
+      '我很早就迷上了 AI。2020 年我的高中畢業專題<a href="/papers/ai-in-our-daily-lives-alfaro-2020.pdf">《AI in our daily lives》</a>探討 AI 能變得多像人：我先用 C# 搭配 Unity 做了一個聊天機器人，再用 Python 寫成神經網路版本，讓人和它對話。那是 ChatGPT 問世的兩年前。',
       '把這些串在一起的是「驗證」。測試集上的高分對我來說不夠。我用 SHAP、Grad-CAM 與 LIME 去看模型<em>為什麼</em>做出某個判斷，而且不只一次發現模型其實在作弊。',
       '課餘時間我喜歡動手玩。原本要付費的工具我會自己架，也在只有 4 GB 的 GPU 上跑本地模型。',
       '我是瑞典公民，可接受安全審查。母語是瑞典語，英語流利，目前在台灣交換並學習中文。',

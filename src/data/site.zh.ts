@@ -40,6 +40,15 @@ export const zh = {
 
   exchange: { school: '長庚大學', place: '台灣桃園', when: '2026 年秋季' },
 
+  school: {
+    name: 'LBS Trollhättan',
+    programme: '高中，科技學程',
+    year: '2020',
+    detail: '畢業專題：《AI in our daily lives》，以聊天機器人實驗探討 AI 能變得多像人。',
+    link: '/papers/ai-in-our-daily-lives-alfaro-2020.pdf',
+    linkLabel: '閱讀專題（PDF，瑞典文）',
+  },
+
   education: {
     degree: '人工智慧與機器學習工程碩士',
     school: '瑞典布萊金厄理工學院（Blekinge Institute of Technology），卡爾斯克魯納',
