@@ -293,3 +293,5 @@ html:lang(zh) em, html:lang(zh) i { font-style: normal; font-weight: 700; }
 .xor-pt { fill: var(--ink); font: 700 13px var(--mono); }
 .xor-pt.on { fill: #1b1300; }
 .prose .footnotes { font-size: 0.9rem; color: var(--mist); margin-top: 2.5rem; border-top: 1px solid var(--line); }
+/* Keep Chinese words together in headlines; break at spaces and punctuation. */
+html:lang(zh) h1 { word-break: keep-all; }
