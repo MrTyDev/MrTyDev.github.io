@@ -39,6 +39,17 @@ const others = (Object.keys(LANGS) as Lang[]).map((l) => ({ lang: l, href: switc
   {lang === 'zh'
     ? <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet" />
     : <link href={`https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap&text=${encodeURIComponent(identity.nameZh + LANGS.zh.short + LANGS.zh.label)}`} rel="stylesheet" />}
+  <script is:inline>
+    // Visitor count (GoatCounter, no cookies). Only on the published site, so
+    // local builds and preview copies don't inflate the numbers.
+    if (location.hostname === 'mrtydev.github.io') {
+      var gc = document.createElement('script');
+      gc.async = true;
+      gc.src = 'https://gc.zgo.at/count.js';
+      gc.dataset.goatcounter = 'https://mrtydev.goatcounter.com/count';
+      document.head.appendChild(gc);
+    }
+  </script>
 </head>
 <body>
   <a class="skip" href="#main">{tr.skip}</a>

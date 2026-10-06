@@ -35,7 +35,7 @@ const en = {
   langLabel: 'Language',
   darkMode: 'Dark mode',
   footerBig: 'Contact',
-  footerBuilt: 'Built with Astro and Claude Code, for a generative AI course.',
+  footerBuilt: 'Built with Astro and Claude Code, for a generative AI course. Visits are counted with GoatCounter, without cookies.',
   elsewhere: 'Elsewhere',
   tags: { research: 'Research', defence: 'Defence', xai: 'Explainable AI', edge: 'Edge AI', llm: 'LLMs & agents', homelab: 'Homelab' } as Record<Tag, string>,
 
@@ -106,7 +106,7 @@ const zh: Dict = {
   langLabel: '語言',
   darkMode: '深色模式',
   footerBig: '聯絡方式',
-  footerBuilt: '使用 Astro 與 Claude Code 製作，為生成式 AI 課程的作業。',
+  footerBuilt: '使用 Astro 與 Claude Code 製作，為生成式 AI 課程的作業。訪客數由 GoatCounter 統計，不使用 cookie。',
   elsewhere: '其他連結',
   tags: { research: '研究', defence: '國防', xai: '可解釋 AI', edge: '邊緣 AI', llm: '大型語言模型與代理', homelab: '自架伺服器' },
 
